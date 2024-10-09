@@ -83,7 +83,9 @@ export default function LoginForm() {
             </Button>
           </form>
           <div className="mt-4 text-center text-sm sm:text-base">
-            <span className="text-gray-600">Don't have an account yet? </span>
+            <span className="text-gray-600">
+              Don&apos;t have an account yet?
+            </span>
             <Link href="/auth/register" size="sm" className="text-blue-600">
               Sign Up
             </Link>
