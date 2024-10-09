@@ -10,10 +10,12 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setError("");
 
     try {
       const response = await fetch(
@@ -36,6 +38,7 @@ export default function LoginForm() {
       }
     } catch (error) {
       console.error("error:", error);
+      setError("An unexpected error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -48,6 +51,7 @@ export default function LoginForm() {
           <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center">
             Login
           </h1>
+          {error && <div className="text-red-500 mb-4">{error}</div>}
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
               type="email"
@@ -83,9 +87,7 @@ export default function LoginForm() {
             </Button>
           </form>
           <div className="mt-4 text-center text-sm sm:text-base">
-            <span className="text-gray-600">
-              Don&apos;t have an account yet?
-            </span>
+            <span className="text-gray-600">Don&apos;t have an account yet? </span>
             <Link href="/auth/register" size="sm" className="text-blue-600">
               Sign Up
             </Link>
