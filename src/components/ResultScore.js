@@ -30,10 +30,12 @@ export default function Result({ scores, count }) {
             แบบประเมินศักยภาพทั้งหมด 8 หัวข้อ
           </h1>
           <div className="text-sm text-gray-500 mt-2">
-            <span>บริษัท : {scores.user.companyName}</span>
+            {/* <span>บริษัท : {scores.user.companyName}</span> */}
+            <span>บริษัท : Allmass</span>
             <span className="mx-4">|</span>
             <span>
-              โดย {scores.user.firstName} {scores.user.lastName}
+              {/* โดย {scores.user.firstName} {scores.user.lastName} */}
+              โดย Test Demo
             </span>
             <span className="mx-4">|</span>
             <span>
