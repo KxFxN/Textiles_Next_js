@@ -94,7 +94,8 @@ export async function POST(req) {
 
     // Check if user has already submitted a score and update or create new
     const updatedScore = await Scores.findOneAndUpdate(
-      { user: decodedToken.userId },
+      // { user: decodedToken.userId },
+      { user: "6706895a94cad20b411bbbac" },
       {
         scores: newScores,
         categoryScores,
