@@ -33,7 +33,7 @@ export default function Result({ scores, count }) {
             <span>บริษัท : {scores.user.companyName}</span>
             <span className="mx-4">|</span>
             <span>
-              โดย{scores.user.firstName} {scores.user.lastName}
+              โดย {scores.user.firstName} {scores.user.lastName}
             </span>
             <span className="mx-4">|</span>
             <span>
@@ -55,22 +55,28 @@ export default function Result({ scores, count }) {
             <h2 className="text-2xl font-semibold text-blue-600 mb-4">
               คะแนนของคุณ :{" "}
               <span className="text-blue-700">
-                {scores.totalScore} / {count * 5} คะแนน
+                {scores.totalScore} / {count.totalQuestions * 5} คะแนน
               </span>
             </h2>
-            {scores.categoryScores.map((category, index) => (
-              <div
-                key={index}
-                className="flex justify-between mb-2 text-gray-700"
-              >
-                <span>
-                  หัวข้อที่ {index + 1}.{categories[index]}
-                </span>
-                <span className="font-semibold">
-                  : {category.totalScore} / {Math.round((count * 5) / 4)} คะแนน
-                </span>
-              </div>
-            ))}
+            {scores.categoryScores.map((category, index) => {
+              const categoryData = count.categoryCounts[index];
+              const questionCount = categoryData.questionCount;
+              const fullScore = Math.round(questionCount * 5);
+
+              return (
+                <div
+                  key={index}
+                  className="flex justify-between mb-2 text-gray-700"
+                >
+                  <span>
+                    หัวข้อที่ {index + 1}.{categories[index]}
+                  </span>
+                  <span className="font-semibold">
+                    : {category.totalScore} / {fullScore} คะแนน
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
 

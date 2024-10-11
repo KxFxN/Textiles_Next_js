@@ -12,18 +12,27 @@ export async function GET(req) {
       return NextResponse.json({
         success: false,
         status: 404,
-        msg: "questions not found",
+        msg: "Questions not found",
       });
     }
 
-    // Calculate total questions from all categories
+    // คำนวณจำนวนคำถามทั้งหมดจากทุกหมวดหมู่
     const totalQuestions = questions.categories.reduce((total, category) => {
       return total + category.questions.length;
     }, 0);
 
+    // คำนวณจำนวนคำถามในแต่ละหมวดหมู่
+    const categoryCounts = questions.categories.map((category) => ({
+      categoryName: category.name,
+      questionCount: category.questions.length,
+    }));
+
     return NextResponse.json({
       success: true,
-      data: totalQuestions,
+      data: {
+        totalQuestions, // จำนวนคำถามทั้งหมด
+        categoryCounts, // จำนวนคำถามในแต่ละหมวดหมู่
+      },
       status: 200,
       msg: "GET request processed successfully",
     });

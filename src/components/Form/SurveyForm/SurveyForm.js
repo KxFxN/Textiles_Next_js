@@ -23,11 +23,7 @@ export default function Component({ QuestionData }) {
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
   const [responses, setResponses] = useState({});
   const [Back, setBack] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    console.log(responses);
-  }, [responses]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleOptionChange = (questionId, score) => {
     setResponses((prev) => ({
@@ -48,6 +44,7 @@ export default function Component({ QuestionData }) {
   };
 
   const submitResponses = async (responses) => {
+    setIsLoading(true);
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/result`,
@@ -65,6 +62,8 @@ export default function Component({ QuestionData }) {
       router.push("/result");
     } catch (error) {
       console.error(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -102,8 +101,10 @@ export default function Component({ QuestionData }) {
       <div className="max-w-7xl mx-auto bg-white rounded-3xl shadow-lg p-8">
         <div className="border-l-4 border-green-500 pl-4 mb-6">
           <h1 className="text-2xl font-bold mb-2 text-gray-800">
-            แบบประเมินศักยภาพสำหรับผู้ประกอบการ จำนวน {categories.length} หัวข้อ
+            <span className="text-green-500">แบบประเมินศักยภาพ</span>
+            สำหรับผู้ประกอบการ จำนวน {categories.length} หัวข้อ
           </h1>
+
           <p className="text-sm text-gray-600">
             เมื่อเริ่มทำแบบประเมิน จะมีคำถามทั้งหมด {categories.length} หัวข้อ
             โดยใช้เวลาประมาณ 15-20 นาทีในการทำแบบประเมินให้เสร็จ
@@ -111,7 +112,7 @@ export default function Component({ QuestionData }) {
         </div>
 
         <div
-          className="flex flex-wrap gap-2 mb-6"
+          className="grid grid-cols-4 gap-2 mb-6"
           role="list"
           aria-label="Assessment Topics"
         >
@@ -127,7 +128,7 @@ export default function Component({ QuestionData }) {
           ].map((topic, index) => (
             <div
               key={index}
-              className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-sm flex items-center"
+              className="bg-blue-50 text-blue-600 p-4 rounded-lg text-sm flex items-center"
               role="listitem"
               aria-label={`Topic ${index + 1}`}
             >
@@ -140,7 +141,7 @@ export default function Component({ QuestionData }) {
         </div>
 
         <div
-          className="bg-green-50 text-green-700 px-4 py-2 rounded-lg mb-6 font-medium"
+          className="w-fit mx-auto bg-green-100 text-green-700 p-6 rounded-2xl mb-6 font-medium"
           role="heading"
           aria-level="2"
         >
@@ -269,10 +270,16 @@ export default function Component({ QuestionData }) {
                 ? "Next page"
                 : "Complete assessment"
             }
+            isLoading={isLoading}
           >
-            {currentCategoryIndex < categories.length - 1
+            {isLoading
+              ? ""
+              : currentCategoryIndex < categories.length - 1
               ? "ถัดไป"
               : "เสร็จสิ้น"}
+            {/* {currentCategoryIndex < categories.length - 1
+              ? "ถัดไป"
+              : "เสร็จสิ้น"} */}
           </Button>
         </div>
       </div>
