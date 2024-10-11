@@ -26,7 +26,7 @@ export async function GetResultByUserID() {
     // const res = await fetch(
     //   `${process.env.NEXT_PUBLIC_API_URL}/api/result/${decodedToken.userId}`,
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/result/6704253de8cae24a2837be5c`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/result/6706895a94cad20b411bbbac`,
       {
         method: "GET",
         // headers: {
