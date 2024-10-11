@@ -4,8 +4,9 @@ import { GetResultByUserID } from "../action/Result";
 import { GetQuestionCount, GetQuestionCountLength } from "../action/Question";
 
 export default async function page() {
-  const ResultScore = await GetResultByUserID();
-  const QuestionCount = await GetQuestionCount();
+  // const ResultScore = await GetResultByUserID();
+  // const QuestionCount = await GetQuestionCount();
 
-  return <Result scores={ResultScore.data[0]} count={QuestionCount.data} />;
+  // return <Result scores={ResultScore.data[0]} count={QuestionCount.data} />;
+  return <Result />;
 }

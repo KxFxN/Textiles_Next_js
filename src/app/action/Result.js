@@ -4,34 +4,32 @@ import { verifyToken } from "@/lib/verifyToken";
 export async function GetResultByUserID() {
   try {
     // ดึง token และ refreshToken จาก cookie
-    // const cookieStore = cookies();
-    // const token = cookieStore.get("token")?.value;
-    // const refreshToken = cookieStore.get("refreshToken")?.value;
+    const cookieStore = cookies();
+    const token = cookieStore.get("token")?.value;
+    const refreshToken = cookieStore.get("refreshToken")?.value;
 
-    // if (!token) {
-    //   throw new Error("Token not found in cookies");
-    // }
+    if (!token) {
+      throw new Error("Token not found in cookies");
+    }
 
-    // // ถอดรหัส token
-    // const decodedToken = await verifyToken(token);
+    // ถอดรหัส token
+    const decodedToken = await verifyToken(token);
 
-    // if (!decodedToken) {
-    //   throw new Error("Invalid token");
-    // }
+    if (!decodedToken) {
+      throw new Error("Invalid token");
+    }
 
-    // // สร้าง cookie string
-    // const cookieString = `token=${token}; refreshToken=${refreshToken}`;
+    // สร้าง cookie string
+    const cookieString = `token=${token}; refreshToken=${refreshToken}`;
 
     // ดำเนินการ fetch ข้อมูล
-    // const res = await fetch(
-    //   `${process.env.NEXT_PUBLIC_API_URL}/api/result/${decodedToken.userId}`,
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/result/6706895a94cad20b411bbbac`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/result/${decodedToken.userId}`,
       {
         method: "GET",
-        // headers: {
-        //   Cookie: cookieString,
-        // },
+        headers: {
+          Cookie: cookieString,
+        },
       }
     );
 

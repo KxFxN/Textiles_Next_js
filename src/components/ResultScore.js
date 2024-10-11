@@ -15,10 +15,89 @@ const categories = [
   "ด้านความยั่งยืน",
 ];
 
-export default function Result({ scores, count }) {
+// export default function Result({ scores, count }) {
+export default function Result() {
   const handleDownloadPDF = () => {
     console.log("Download PDF");
     // Implement PDF download logic here
+  };
+
+  const scores = {
+    user: {
+      _id: "6704253de8cae24a2837be5c",
+      companyName: "Tech Solutions",
+      firstName: "John",
+      lastName: "Doe",
+      email: "sakarin14184@gmail.com",
+      role: "user",
+      position: "Software Engineer",
+      department: "Engineering",
+      phone: "+1234567890",
+      isActive: true,
+      createdAt: "2024-10-07T18:15:25.761Z",
+      updatedAt: "2024-10-07T18:15:25.761Z",
+      __v: 0,
+    },
+    scores: {
+      1: 6,
+      2: 10,
+      3: 12,
+      4: 20,
+      5: 40,
+    },
+    categoryScores: [
+      {
+        categoryId: 0,
+        totalScore: 26,
+      },
+      {
+        categoryId: 1,
+        totalScore: 25,
+      },
+      {
+        categoryId: 2,
+        totalScore: 14,
+      },
+      {
+        categoryId: 3,
+        totalScore: 23,
+      },
+    ],
+    totalScore: 88,
+    maxScore: 40,
+    createdAt: {
+      $date: "2024-10-09T13:05:58.488Z",
+    },
+    updatedAt: {
+      $date: "2024-10-09T13:05:58.488Z",
+    },
+    __v: 0,
+  };
+
+  const count = {
+    totalQuestions: 28,
+    categoryCounts: [
+      {
+        categoryName:
+          "การสร้างแรงจูงใจให้กับพนักงาน (Motivating people as they work)",
+        questionCount: 7,
+      },
+      {
+        categoryName:
+          "การพัฒนาพนักงานให้มีความสามารถมากขึ้น (Developing people as they work)",
+        questionCount: 8,
+      },
+      {
+        categoryName:
+          "การกำกับ ควบคุม ดูแลพนักงานให้สามารถทำงานได้ตามเป้าหมาย (Directing people as they work)",
+        questionCount: 6,
+      },
+      {
+        categoryName:
+          "การคัดเลือกและจัดคนให้หมาะกับงาน (Identifying the best people for the job)",
+        questionCount: 7,
+      },
+    ],
   };
 
   return (
@@ -30,12 +109,11 @@ export default function Result({ scores, count }) {
             แบบประเมินศักยภาพทั้งหมด 8 หัวข้อ
           </h1>
           <div className="text-sm text-gray-500 mt-2">
-            {/* <span>บริษัท : {scores.user.companyName}</span> */}
+            <span>บริษัท : {scores.user.companyName}</span>
             <span>บริษัท : Allmass</span>
             <span className="mx-4">|</span>
             <span>
-              {/* โดย {scores.user.firstName} {scores.user.lastName} */}
-              โดย Test Demo
+              โดย {scores.user.firstName} {scores.user.lastName}
             </span>
             <span className="mx-4">|</span>
             <span>

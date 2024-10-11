@@ -39,23 +39,23 @@ export async function POST(req) {
   try {
     const { responses } = await req.json();
 
-    // const cookieStore = cookies();
-    // const token = cookieStore.get("token");
-    // if (!token) {
-    //   return NextResponse.json({
-    //     success: false,
-    //     status: 401,
-    //     msg: "Unauthorized: No token provided",
-    //   });
-    // }
-    // const decodedToken = await verifyToken(token.value);
-    // if (!decodedToken) {
-    //   return NextResponse.json({
-    //     success: false,
-    //     status: 401,
-    //     msg: "Unauthorized: Invalid token",
-    //   });
-    // }
+    const cookieStore = cookies();
+    const token = cookieStore.get("token");
+    if (!token) {
+      return NextResponse.json({
+        success: false,
+        status: 401,
+        msg: "Unauthorized: No token provided",
+      });
+    }
+    const decodedToken = await verifyToken(token.value);
+    if (!decodedToken) {
+      return NextResponse.json({
+        success: false,
+        status: 401,
+        msg: "Unauthorized: Invalid token",
+      });
+    }
 
     await ensureDbConnected();
 
@@ -94,8 +94,7 @@ export async function POST(req) {
 
     // Check if user has already submitted a score and update or create new
     const updatedScore = await Scores.findOneAndUpdate(
-      // { user: decodedToken.userId },
-      { user: "6706895a94cad20b411bbbac" },
+      { user: decodedToken.userId },
       {
         scores: newScores,
         categoryScores,
